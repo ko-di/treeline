@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "forest-kit — scale design without losing craft",
   description:
     "A workflow for turning an idea into something real. Built for Claude Code. AI-skeptical, opinionated, file-based. Studio K.",
-  metadataBase: new URL("https://forest-kit.vercel.app"),
+  metadataBase: new URL("https://treeline-sand.vercel.app"),
   openGraph: {
     title: "forest-kit — scale design without losing craft",
     description:
