@@ -1,13 +1,18 @@
 /**
- * /docs — stub page.
+ * /docs — link manifest to the kit's reference docs.
  *
- * Detailed docs live in the kit's repo (NAMING.md, references/*).
- * This page collects links to them and adds a short summary.
- *
- * Full standalone docs site is deferred to a later session.
+ * Detailed docs live in the kit's repo as Markdown. This page is a
+ * developer reference, footer-linked from every page.
  */
 
 import Link from "next/link";
+import { Footer } from "@/components/sections";
+
+export const metadata = {
+  title: "Docs — forest-kit",
+  description:
+    "Manifest of links to the kit's reference docs — NAMING, PURPOSE, QUESTIONING, CHALLENGE, TEXTURE, BRIDGES, forest-lite, skills.",
+};
 
 export default function DocsPage() {
   return (
@@ -21,6 +26,8 @@ export default function DocsPage() {
             <span className="t-muted">·</span>
             <span className="t-muted">docs</span>
           </div>
+
+          <span className="accent-bar" aria-hidden="true" />
 
           <h1 className="t-display mb-8">Docs.</h1>
 
@@ -99,16 +106,9 @@ export default function DocsPage() {
             ))}
           </ul>
 
-          <p className="t-small t-muted mt-12">
-            <Link
-              href="/"
-              className="underline decoration-1 underline-offset-4 hover:decoration-2"
-            >
-              ← Back to the landing page
-            </Link>
-          </p>
         </div>
       </section>
+      <Footer />
     </main>
   );
 }
