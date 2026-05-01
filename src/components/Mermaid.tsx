@@ -1,16 +1,39 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Client-only Mermaid renderer.
- * Initializes once on first mount, renders the chart into a div.
- * Syntax is passed as the `chart` prop.
+ *
+ * Lazy-loads the mermaid library only when the component scrolls into the
+ * viewport — saves ~500KB of initial JS for users who never scroll past the
+ * fold. Renders the chart syntax (passed as `chart`) into a div.
  */
 export function Mermaid({ chart, id }: { chart: string; id: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
 
+  // 1. Watch for the diagram entering the viewport before loading mermaid.
   useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" } // start loading slightly before it scrolls in
+    );
+
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // 2. Once in view, dynamically import mermaid and render.
+  useEffect(() => {
+    if (!inView) return;
     let cancelled = false;
 
     (async () => {
@@ -59,12 +82,12 @@ export function Mermaid({ chart, id }: { chart: string; id: string }) {
     return () => {
       cancelled = true;
     };
-  }, [chart, id]);
+  }, [inView, chart, id]);
 
   return (
     <div
       ref={ref}
-      className="my-8 flex justify-center [&_svg]:max-w-full [&_svg]:h-auto"
+      className="my-8 flex justify-center min-h-[180px] [&_svg]:max-w-full [&_svg]:h-auto"
       aria-label="forest-kit trail diagram"
     />
   );

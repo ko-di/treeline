@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────────
-   forest-kit-site · design tokens
+   treeline · design tokens
    editorial · typography-forward · monochrome + one accent
    ───────────────────────────────────────────────── */
 
@@ -14,6 +14,8 @@
 
   /* Single accent — warm ochre. Used sparingly. Never decorative. */
   --accent: #b8682a;
+  --accent-tint: rgba(184, 104, 42, 0.08);
+  --accent-tint-hover: rgba(184, 104, 42, 0.16);
 
   /* Type scale — generous, editorial */
   --type-display: clamp(2.5rem, 6vw, 4.75rem);
@@ -26,8 +28,6 @@
 
   /* Spacing rhythm */
   --space-section: clamp(4rem, 10vw, 7rem);
-  --space-block: 2.5rem;
-  --space-paragraph: 1.25rem;
 
   /* Single depth method — hairline borders. No shadows, no gradients. */
   --border-hairline: 1px solid var(--rule);
@@ -40,6 +40,8 @@
     --muted: #8a8a85;
     --rule: #2a2a28;
     --accent: #d68a4f;
+    --accent-tint: rgba(214, 138, 79, 0.10);
+    --accent-tint-hover: rgba(214, 138, 79, 0.18);
   }
 }
 
@@ -57,8 +59,10 @@
    Reset + baseline
    ───────────────────────────────────────────────── */
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -89,6 +93,13 @@ code, kbd, samp, pre {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* Link underline transitions — soft, not instant */
+@media (prefers-reduced-motion: no-preference) {
+  a {
+    transition: text-decoration-thickness 150ms ease-out;
+  }
 }
 
 /* ─────────────────────────────────────────────────
@@ -161,15 +172,12 @@ code, kbd, samp, pre {
   border-bottom: none;
 }
 
-/* Inline-code styling for /pack, /trail, etc */
-.kit-verb {
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.92em;
-  color: var(--accent);
-  font-weight: 500;
+/* Hairline borders for inline list dividers, etc. */
+.rule-border {
+  border-color: var(--rule);
 }
 
-/* Terminal-ish block */
+/* Terminal block — symmetric border treatment in both modes */
 .terminal {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.875rem;
@@ -178,6 +186,7 @@ code, kbd, samp, pre {
   color: var(--background);
   padding: 1.5rem;
   border-radius: 4px;
+  border: var(--border-hairline);
   overflow-x: auto;
   white-space: pre;
 }
@@ -186,19 +195,40 @@ code, kbd, samp, pre {
   .terminal {
     background: #1a1a18;
     color: var(--foreground);
-    border: var(--border-hairline);
   }
 }
 
-/* Inline copy-able install command */
+/* Inline code-style chip — used for install commands shown inline */
 .cmd {
   display: inline-block;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.95em;
-  background: rgba(184, 104, 42, 0.08);
+  background: var(--accent-tint);
   padding: 0.15em 0.5em;
   border-radius: 3px;
   color: var(--foreground);
+}
+
+/* Same chip but used as a clickable CTA — adds hover state */
+.cmd-cta {
+  display: inline-block;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.95em;
+  background: var(--accent-tint);
+  padding: 0.4em 0.85em;
+  border-radius: 3px;
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cmd-cta {
+    transition: background 150ms ease-out;
+  }
+}
+
+.cmd-cta:hover {
+  background: var(--accent-tint-hover);
 }
 
 /* A subtle accent rule, used for emphasis on the position line */

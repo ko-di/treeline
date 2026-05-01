@@ -75,10 +75,10 @@ function Hero() {
           friction where most AI tools apply acceleration.
         </p>
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <code className="cmd">
-            gh repo create my-idea --template ko-di/forest-kit --clone
-          </code>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-baseline">
+          <pre className="cmd whitespace-normal sm:whitespace-pre">
+            <code>gh repo create my-idea --template ko-di/forest-kit --clone</code>
+          </pre>
           <a
             href="https://github.com/ko-di/forest-kit"
             className="t-small underline decoration-1 underline-offset-4 hover:decoration-2"
@@ -132,7 +132,7 @@ const refusals: { rule: string; reason: string }[] = [
 
 function Refusals() {
   return (
-    <section className="section" id="refusals">
+    <section className="section">
       <div className="shell">
         <h2 className="t-h1 mb-4">What this kit refuses to do.</h2>
         <p className="t-body t-muted mb-12 max-w-[60ch]">
@@ -141,14 +141,13 @@ function Refusals() {
           you — this is the wrong kit. Read on, or stop here.
         </p>
 
-        <ul className="border-t" style={{ borderColor: "var(--rule)" }}>
+        <ul className="border-t rule-border">
           {refusals.map((r) => (
             <li
               key={r.rule}
-              className="border-b py-7 grid gap-2 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] sm:gap-10"
-              style={{ borderColor: "var(--rule)" }}
+              className="border-b rule-border py-7 grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] sm:gap-10"
             >
-              <h3 className="t-h3 leading-snug max-w-[28ch]">{r.rule}</h3>
+              <h3 className="t-h2 max-w-[28ch]">{r.rule}</h3>
               <p className="t-body t-muted max-w-[60ch]">{r.reason}</p>
             </li>
           ))}
@@ -210,7 +209,7 @@ const camps: { name: string; line: string }[] = [
 
 function Trail() {
   return (
-    <section className="section" id="trail">
+    <section className="section">
       <div className="shell">
         <h2 className="t-h1 mb-4">The trail.</h2>
         <p className="t-body t-muted mb-8 max-w-[60ch]">
@@ -221,15 +220,11 @@ function Trail() {
 
         <Mermaid id="trail" chart={trailDiagram} />
 
-        <ol
-          className="mt-12 border-t"
-          style={{ borderColor: "var(--rule)" }}
-        >
+        <ol className="mt-12 border-t rule-border">
           {camps.map((c, i) => (
             <li
               key={c.name}
-              className="border-b py-6 grid gap-2 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-10"
-              style={{ borderColor: "var(--rule)" }}
+              className="border-b rule-border py-6 grid gap-2 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-10"
             >
               <div className="flex items-baseline gap-3">
                 <span className="font-mono t-small t-muted">
@@ -287,7 +282,7 @@ const personas: { verb: string; persona: string }[] = [
 
 function Studio() {
   return (
-    <section className="section" id="studio">
+    <section className="section">
       <div className="shell">
         <h2 className="t-h1 mb-4">The studio.</h2>
         <p className="t-body t-muted mb-4 max-w-[60ch]">
@@ -301,23 +296,19 @@ function Studio() {
           model, honestly named.
         </p>
 
-        <ul
-          className="border-t"
-          style={{ borderColor: "var(--rule)" }}
-        >
+        <ul className="border-t rule-border">
           {personas.map((p) => (
             <li
               key={p.verb}
-              className="border-b py-5 grid gap-2 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-10 sm:items-baseline"
-              style={{ borderColor: "var(--rule)" }}
+              className="border-b rule-border py-5 grid gap-2 sm:grid-cols-[7rem_minmax(0,1fr)] sm:gap-10 sm:items-baseline"
             >
               <code
                 className="font-mono"
-                style={{ color: "var(--accent)" }}
+                style={{ color: "var(--accent)", fontSize: "var(--type-body)" }}
               >
                 {p.verb}
               </code>
-              <p className="t-body max-w-[55ch]">{p.persona}</p>
+              <p className="t-body t-muted max-w-[55ch]">{p.persona}</p>
             </li>
           ))}
         </ul>
@@ -376,7 +367,7 @@ const artifacts: { path: string; what: string }[] = [
 
 function Artifacts() {
   return (
-    <section className="section" id="what-you-get">
+    <section className="section">
       <div className="shell">
         <h2 className="t-h1 mb-4">What you get when you're done.</h2>
         <p className="t-body t-muted mb-12 max-w-[60ch]">
@@ -385,12 +376,11 @@ function Artifacts() {
           you leave with the work — not a SaaS subscription.
         </p>
 
-        <ul className="border-t" style={{ borderColor: "var(--rule)" }}>
+        <ul className="border-t rule-border">
           {artifacts.map((a) => (
             <li
               key={a.path}
-              className="border-b py-5 grid gap-2 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-10 sm:items-baseline"
-              style={{ borderColor: "var(--rule)" }}
+              className="border-b rule-border py-5 grid gap-2 sm:grid-cols-[10rem_minmax(0,1fr)] sm:gap-10 sm:items-baseline"
             >
               <code
                 className="font-mono"
@@ -398,7 +388,7 @@ function Artifacts() {
               >
                 {a.path}
               </code>
-              <p className="t-body max-w-[55ch]">{a.what}</p>
+              <p className="t-body t-muted max-w-[55ch]">{a.what}</p>
             </li>
           ))}
         </ul>
@@ -434,7 +424,7 @@ const steps: { n: string; title: string; body: string; cmd?: string }[] = [
 
 function HowItWorks() {
   return (
-    <section className="section" id="how-it-works">
+    <section className="section">
       <div className="shell">
         <h2 className="t-h1 mb-4">How it works.</h2>
         <p className="t-body t-muted mb-12 max-w-[60ch]">
@@ -495,7 +485,7 @@ const notForList: string[] = [
 
 function ForWhom() {
   return (
-    <section className="section" id="for-whom">
+    <section className="section">
       <div className="shell">
         <h2 className="t-h1 mb-12">Who this is for.</h2>
 
@@ -521,8 +511,7 @@ function ForWhom() {
               {notForList.map((line) => (
                 <li
                   key={line}
-                  className="t-body t-muted max-w-[40ch] pl-4 border-l"
-                  style={{ borderColor: "var(--rule)" }}
+                  className="t-body t-muted max-w-[40ch] pl-4 border-l rule-border"
                 >
                   {line}
                 </li>
@@ -548,7 +537,7 @@ function ForWhom() {
 
 function Install() {
   return (
-    <section className="section" id="install">
+    <section className="section">
       <div className="shell">
         <h2 className="t-h1 mb-4">Install.</h2>
         <p className="t-body t-muted mb-12 max-w-[60ch]">
@@ -609,7 +598,7 @@ cd my-idea && rm -rf .git && git init
 
 function Tip() {
   return (
-    <section className="section" id="tip">
+    <section className="section">
       <div className="shell">
         <h2 className="t-h2 mb-4">If it earned its keep.</h2>
         <p className="t-body t-muted mb-6 max-w-[60ch]">
@@ -620,7 +609,7 @@ function Tip() {
         </p>
         <a
           href="https://revolut.me/kdimakos/pocket/CUxQ83rl98"
-          className="cmd inline-block"
+          className="cmd-cta"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -642,12 +631,9 @@ function Tip() {
 
 function Footer() {
   return (
-    <footer
-      className="border-t"
-      style={{ borderColor: "var(--rule)" }}
-    >
+    <footer className="border-t rule-border">
       <div className="shell py-12">
-        <div className="grid gap-8 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:gap-16">
+        <div className="grid gap-8 sm:grid-cols-2 sm:gap-16">
           <div>
             <p className="font-mono t-small mb-4">forest-kit</p>
             <p className="t-small t-muted max-w-[40ch]">
