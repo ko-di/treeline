@@ -5,15 +5,16 @@
  * Single column. No card grids. No marketing chrome.
  *
  * Sections, top to bottom:
- *   1. Hero — position + install   ← done
- *   2. Refusal list                 ← done
- *   3. The trail                    ← done
- *   4. The studio (personas)        ← done
- *   5. What you get                 ← done
- *   6. How it works                 ← done
- *   7. Who it's for / not for       ← done
- *   8. Install / get started        ← drafted
- *   9. Footer                       ← drafted
+ *   1. Hero — position + install
+ *   2. Refusal list
+ *   3. The trail
+ *   4. The studio (personas)
+ *   5. What you get
+ *   6. How it works
+ *   7. Who it's for / not for
+ *   8. Install / get started
+ *   9. Tip — Revolut Pay link (free kit, optional gratitude)
+ *  10. Footer
  */
 
 import { Mermaid } from "@/components/Mermaid";
@@ -29,6 +30,7 @@ export default function Home() {
       <HowItWorks />
       <ForWhom />
       <Install />
+      <Tip />
       <Footer />
     </main>
   );
@@ -600,7 +602,41 @@ cd my-idea && rm -rf .git && git init
 }
 
 /* ─────────────────────────────────────────────────
-   Section 9 · Footer
+   Section 9 · Tip
+   The kit is MIT-free. This is the optional thank-you link.
+   Direct Revolut Pay → Studio K's pot. No paywall, no chrome.
+   ───────────────────────────────────────────────── */
+
+function Tip() {
+  return (
+    <section className="section" id="tip">
+      <div className="shell">
+        <h2 className="t-h2 mb-4">If it earned its keep.</h2>
+        <p className="t-body t-muted mb-6 max-w-[60ch]">
+          forest-kit is free under MIT. There's no paywall, no upsell, no
+          “pro tier” gating updates. If the kit saved you time or sharpened
+          something you were building, you can leave a tip — entirely
+          optional, anonymous, no follow-up.
+        </p>
+        <a
+          href="https://revolut.me/kdimakos/pocket/CUxQ83rl98"
+          className="cmd inline-block"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Tip the work →
+        </a>
+        <p className="t-small t-muted mt-6 max-w-[60ch]">
+          Tips go to a Studio K pot, not a corporate revenue line. Updates
+          ship as they're built — paid or not.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────────
+   Section 10 · Footer
    License, source, Studio K mention, secondary nav.
    ───────────────────────────────────────────────── */
 
@@ -650,6 +686,15 @@ function Footer() {
                 className="block underline decoration-1 underline-offset-4 hover:decoration-2"
               >
                 GitHub
+              </a>
+              <a
+                href="https://revolut.me/kdimakos/pocket/CUxQ83rl98"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block underline decoration-1 underline-offset-4 hover:decoration-2"
+                style={{ color: "var(--accent)" }}
+              >
+                Tip the work
               </a>
               <a
                 href="https://github.com/ko-di/forest-kit/blob/main/LICENSE"
