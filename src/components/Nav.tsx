@@ -3,10 +3,12 @@ import Link from "next/link";
 /**
  * Top navigation bar.
  *
- * Single thin row, hairline-bordered. forest-kit mark on the left links to
- * home; three text links on the right. No logo, no buttons, no chrome.
+ * Single thin row, hairline-bordered. Anchor links jump to home-page
+ * sections — there are no separate routes for these. The site is
+ * intentionally one long document with anchor navigation.
  *
- * Mounted in layout.tsx so it appears on every page.
+ * /docs is intentionally not in this nav — it's a footer-linked
+ * developer reference, not a marketing surface.
  */
 export function Nav() {
   return (
@@ -20,18 +22,30 @@ export function Nav() {
           forest-kit
         </Link>
 
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-5 sm:gap-6">
           <Link
-            href="/how-it-works"
+            href="/#refusals"
             className="underline decoration-1 underline-offset-4 hover:decoration-2"
           >
-            How it works
+            Refusals
           </Link>
           <Link
-            href="/about"
+            href="/#trail"
             className="underline decoration-1 underline-offset-4 hover:decoration-2"
           >
-            About
+            Trail
+          </Link>
+          <Link
+            href="/#studio"
+            className="underline decoration-1 underline-offset-4 hover:decoration-2 hidden sm:inline"
+          >
+            Studio
+          </Link>
+          <Link
+            href="/#install"
+            className="underline decoration-1 underline-offset-4 hover:decoration-2"
+          >
+            Install
           </Link>
           <a
             href="https://github.com/ko-di/forest-kit"

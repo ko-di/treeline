@@ -6,15 +6,20 @@
  *
  * Sections, top to bottom:
  *   1. Hero — position + install
- *   2. Refusal list
- *   3. The trail
- *   4. The studio (personas)
+ *   2. Refusals       (#refusals — anchor target)
+ *   3. The trail      (#trail — anchor target)
+ *   4. The studio     (#studio — anchor target)
  *   5. What you get
  *   6. How it works
  *   7. Who it's for / not for
- *   8. Install / get started
- *   9. Tip — Revolut Pay link (free kit, optional gratitude)
- *  10. Footer
+ *   8. About Studio K — short, the moat said honestly
+ *   9. Install        (#install — anchor target)
+ *  10. Tip — Revolut Pay link (free kit, optional gratitude)
+ *  11. Footer
+ *
+ * The site is one long document with anchor navigation in the top nav.
+ * Sub-routes are intentionally avoided to prevent content duplication.
+ * /docs is the only exception — it's a developer reference manifest.
  */
 
 import { Mermaid } from "@/components/Mermaid";
@@ -29,6 +34,7 @@ export default function Home() {
       <Artifacts />
       <HowItWorks />
       <ForWhom />
+      <About />
       <Install />
       <Tip />
       <Footer />
@@ -132,7 +138,7 @@ const refusals: { rule: string; reason: string }[] = [
 
 function Refusals() {
   return (
-    <section className="section">
+    <section className="section" id="refusals">
       <div className="shell">
         <h2 className="t-h1 mb-4">What this kit refuses to do.</h2>
         <p className="t-body t-muted mb-12 max-w-[60ch]">
@@ -209,7 +215,7 @@ const camps: { name: string; line: string }[] = [
 
 function Trail() {
   return (
-    <section className="section">
+    <section className="section" id="trail">
       <div className="shell">
         <h2 className="t-h1 mb-4">The trail.</h2>
         <p className="t-body t-muted mb-8 max-w-[60ch]">
@@ -282,7 +288,7 @@ const personas: { verb: string; persona: string }[] = [
 
 function Studio() {
   return (
-    <section className="section">
+    <section className="section" id="studio">
       <div className="shell">
         <h2 className="t-h1 mb-4">The studio.</h2>
         <p className="t-body t-muted mb-4 max-w-[60ch]">
@@ -531,13 +537,100 @@ function ForWhom() {
 }
 
 /* ─────────────────────────────────────────────────
-   Section 8 · Install
+   Section 8 · About Studio K
+   Short. The moat said honestly. Contact at the end.
+   The kit's own honesty rule applied to the about page —
+   say out loud what's free, what's private, what the gap is.
+   ───────────────────────────────────────────────── */
+
+function About() {
+  return (
+    <section className="section">
+      <div className="shell">
+        <h2 className="t-h1 mb-4">About Studio K.</h2>
+
+        <p className="t-body t-muted mb-4 max-w-[60ch]">
+          forest-kit is built by{" "}
+          <a
+            href="https://kodi.design"
+            className="underline decoration-1 underline-offset-4 hover:decoration-2"
+          >
+            Studio K
+          </a>{" "}
+          — a small design practice run by Kodi. Solo creative direction
+          for products, sites, brands, and the small businesses that
+          quietly do good work without much marketing.
+        </p>
+
+        <p className="t-body t-muted mb-12 max-w-[60ch]">
+          The kit is the workflow Studio K uses every day, made
+          distributable. What ships here is the methodology.
+        </p>
+
+        <h3 className="t-h2 mb-4">The moat, honestly.</h3>
+
+        <p className="t-body t-muted mb-4 max-w-[60ch]">
+          The kit is free under MIT. Anyone can clone it, fork it, ship
+          things with it. The skills, the references, the trail — all
+          public. There is no paid tier gating updates.
+        </p>
+
+        <p className="t-body t-muted mb-4 max-w-[60ch]">
+          What's not distributed is{" "}
+          <code className="font-mono">forest</code> — Studio K's private
+          taste layer. Detailed motion calibrations, brand frameworks
+          tuned across years of client work, specific anti-patterns and
+          references. The kit detects forest at runtime if it's on your
+          machine; otherwise it falls back to{" "}
+          <code className="font-mono">forest-lite</code>, a deliberately
+          weakened public version.
+        </p>
+
+        <p className="t-body t-muted mb-12 max-w-[60ch]">
+          A stranger using forest-kit produces non-slop work. Studio K
+          using forest-kit + private forest produces work no one else can
+          replicate. The gap is the moat. It's structural, not marketing.
+        </p>
+
+        <h3 className="t-h2 mb-4">Reach out.</h3>
+
+        <ul className="t-body t-muted space-y-2 max-w-[60ch]">
+          <li>
+            Studio K —{" "}
+            <a
+              href="https://kodi.design"
+              className="underline decoration-1 underline-offset-4 hover:decoration-2"
+            >
+              kodi.design
+            </a>
+          </li>
+          <li>
+            Source —{" "}
+            <a
+              href="https://github.com/ko-di/forest-kit"
+              className="underline decoration-1 underline-offset-4 hover:decoration-2"
+            >
+              github.com/ko-di/forest-kit
+            </a>
+          </li>
+          <li>
+            Issues — open one on GitHub if something's broken or
+            confusing.
+          </li>
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────────
+   Section 9 · Install
    The conversion. Three commands. Copyable. No hand-holding.
    ───────────────────────────────────────────────── */
 
 function Install() {
   return (
-    <section className="section">
+    <section className="section" id="install">
       <div className="shell">
         <h2 className="t-h1 mb-4">Install.</h2>
         <p className="t-body t-muted mb-12 max-w-[60ch]">
@@ -651,12 +744,18 @@ function Footer() {
 
           <nav className="grid grid-cols-2 gap-4 t-small">
             <div className="space-y-2">
-              <p className="t-muted uppercase tracking-wider">Read</p>
+              <p className="t-muted uppercase tracking-wider">Jump to</p>
               <a
-                href="/how-it-works"
+                href="#trail"
                 className="block underline decoration-1 underline-offset-4 hover:decoration-2"
               >
-                How it works
+                The trail
+              </a>
+              <a
+                href="#install"
+                className="block underline decoration-1 underline-offset-4 hover:decoration-2"
+              >
+                Install
               </a>
               <a
                 href="/docs"
